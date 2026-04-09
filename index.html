@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoshikawa ESM · Bot para WhatsApp</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .page {
+      background: #1a1915;
+      color: #e8e3d5;
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      padding: 0 0 3rem;
+    }
+    
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2rem;
+      border-bottom: 0.5px solid rgba(232, 227, 213, 0.1);
+      position: relative;
+      z-index: 100;
+    }
+    
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(232, 227, 213, 0.08);
+      border: 0.5px solid rgba(232, 227, 213, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .nav-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: #e8e3d5;
+      stroke-width: 1.5;
+    }
+    
+    .nav-name {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #e8e3d5;
+    }
+    
+    .nav-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.25rem;
+    }
+    
+    .nav-link {
+      font-size: 13px;
+      color: rgba(232, 227, 213, 0.5);
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 5px;
+      transition: color .2s, background .2s;
+    }
+    
+    .nav-link:hover {
+      color: #e8e3d5;
+      background: rgba(232, 227, 213, 0.07);
+    }
+    
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    
+    .nav-support {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(181, 169, 138, 0.1);
+      border: 0.5px solid rgba(181, 169, 138, 0.3);
+      border-radius: 6px;
+      padding: 5px 12px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    
+    .nav-support:hover {
+      background: rgba(181, 169, 138, 0.18);
+    }
+    
+    .nav-support-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #b5a98a;
+      flex-shrink: 0;
+    }
+    
+    .nav-support-text {
+      font-size: 12.5px;
+      color: #b5a98a;
+      font-weight: 500;
+    }
+    
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4.5px;
+      cursor: pointer;
+      padding: 4px;
+      background: transparent;
+      border: none;
+    }
+    
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: #e8e3d5;
+      border-radius: 2px;
+      transition: all .25s;
+    }
+    
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+    
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      width: 260px;
+      height: 100vh;
+      background: #1f1e1a;
+      border-left: 0.5px solid rgba(232, 227, 213, 0.1);
+      z-index: 200;
+      transition: right .3s ease;
+      padding: 5rem 1.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    
+    .drawer.open {
+      right: 0;
+    }
+    
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 190;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    
+    .drawer-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .drawer-link {
+      font-size: 14px;
+      color: rgba(232, 227, 213, 0.6);
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
+    }
+    
+    .drawer-link:hover {
+      color: #e8e3d5;
+      background: rgba(232, 227, 213, 0.07);
+    }
+    
+    .drawer-support {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(181, 169, 138, 0.1);
+      border: 0.5px solid rgba(181, 169, 138, 0.25);
+      border-radius: 6px;
+      padding: 10px 12px;
+      text-decoration: none;
+      margin-top: 8px;
+    }
+    
+    .drawer-support-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #b5a98a;
+      flex-shrink: 0;
+    }
+    
+    .drawer-support-text {
+      font-size: 13px;
+      color: #b5a98a;
+      font-weight: 500;
+    }
+    
+    .drawer-divider {
+      height: 0.5px;
+      background: rgba(232, 227, 213, 0.08);
+      margin: 8px 0;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: 4.5rem 2rem 3rem;
+    }
+    
+    .hero-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: #e8e3d5;
+      margin-bottom: 1.25rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-title em {
+      font-style: italic;
+      color: #b5a98a;
+    }
+    
+    .hero-desc {
+      font-size: 15px;
+      color: rgba(232, 227, 213, 0.5);
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .btn-primary {
+      background: #e8e3d5;
+      color: #1a1915;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0.01em;
+      transition: background 0.2s;
+    }
+    
+    .btn-primary:hover {
+      background: #d4cfc0;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      color: #e8e3d5;
+      border: 0.5px solid rgba(232, 227, 213, 0.3);
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 400;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(232, 227, 213, 0.05);
+      border-color: rgba(232, 227, 213, 0.5);
+    }
+    
+    .divider {
+      height: 0.5px;
+      background: rgba(232, 227, 213, 0.08);
+      margin: 0 2rem;
+    }
+    
+    .section {
+      padding: 2.5rem 2rem;
+    }
+    
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(232, 227, 213, 0.35);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+    
+    .notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(181, 169, 138, 0.07);
+      border: 0.5px solid rgba(181, 169, 138, 0.25);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .notice-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+    }
+    
+    .notice-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: #b5a98a;
+      fill: none;
+      stroke-width: 1.5;
+    }
+    
+    .notice-text {
+      font-size: 13px;
+      color: rgba(232, 227, 213, 0.65);
+      line-height: 1.65;
+      font-weight: 300;
+    }
+    
+    .notice-text a {
+      color: #b5a98a;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .notice-text a:hover {
+      text-decoration: underline;
+    }
+    
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+    }
+    
+    .plan-card {
+      background: rgba(232, 227, 213, 0.03);
+      border: 0.5px solid rgba(232, 227, 213, 0.1);
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: border-color .2s;
+    }
+    
+    .plan-card:hover {
+      border-color: rgba(232, 227, 213, 0.22);
+    }
+    
+    .plan-card.featured {
+      border-color: rgba(181, 169, 138, 0.35);
+      background: rgba(181, 169, 138, 0.05);
+    }
+    
+    .plan-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: rgba(181, 169, 138, 0.8);
+      background: rgba(181, 169, 138, 0.12);
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-bottom: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    
+    .plan-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: #e8e3d5;
+      margin-bottom: 4px;
+    }
+    
+    .plan-price {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.6rem;
+      color: #e8e3d5;
+      margin-bottom: 2px;
+    }
+    
+    .plan-validity {
+      font-size: 11px;
+      color: rgba(232, 227, 213, 0.3);
+      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+    }
+    
+    .plan-desc {
+      font-size: 12.5px;
+      color: rgba(232, 227, 213, 0.45);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    
+    .thanks {
+      background: rgba(181, 169, 138, 0.05);
+      border: 0.5px solid rgba(181, 169, 138, 0.18);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    
+    .thanks-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.3rem;
+      color: #e8e3d5;
+      margin-bottom: 6px;
+    }
+    
+    .thanks-title em {
+      font-style: italic;
+      color: #b5a98a;
+    }
+    
+    .thanks-desc {
+      font-size: 13px;
+      color: rgba(232, 227, 213, 0.45);
+      line-height: 1.65;
+      font-weight: 300;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    
+    .link-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(232, 227, 213, 0.03);
+      border: 0.5px solid rgba(232, 227, 213, 0.08);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    
+    .link-item:hover {
+      border-color: rgba(232, 227, 213, 0.18);
+      background: rgba(232, 227, 213, 0.06);
+    }
+    
+    .link-item.support {
+      border-color: rgba(181, 169, 138, 0.3);
+      background: rgba(181, 169, 138, 0.05);
+    }
+    
+    .link-item.support:hover {
+      background: rgba(181, 169, 138, 0.1);
+    }
+    
+    .link-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      background: rgba(232, 227, 213, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    
+    .link-icon.gold {
+      background: rgba(181, 169, 138, 0.12);
+    }
+    
+    .link-icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: #b5a98a;
+      fill: none;
+      stroke-width: 1.5;
+    }
+    
+    .link-icon.dim svg {
+      stroke: rgba(232, 227, 213, 0.45);
+    }
+    
+    .link-label {
+      font-size: 12.5px;
+      color: rgba(232, 227, 213, 0.7);
+      font-weight: 400;
+    }
+    
+    .link-label.gold {
+      color: #b5a98a;
+    }
+    
+    .link-sub {
+      font-size: 11px;
+      color: rgba(232, 227, 213, 0.3);
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 0.5px solid rgba(232, 227, 213, 0.07);
+      margin-top: 1rem;
+    }
+    
+    .footer-text {
+      font-size: 12px;
+      color: rgba(232, 227, 213, 0.22);
+      line-height: 1.9;
+    }
+    
+    .footer-text a {
+      color: rgba(232, 227, 213, 0.38);
+      text-decoration: none;
+    }
+    
+    .footer-text a:hover {
+      color: rgba(232, 227, 213, 0.6);
+    }
+    
+    @media (max-width: 640px) {
+      .nav-center,
+      .nav-right {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .nav {
+        padding: 1.1rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="page">
+    <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
+    <div class="drawer" id="drawer">
+      <a href="#planos" class="drawer-link" onclick="closeDrawer()">Planos</a>
+      <a href="#links" class="drawer-link" onclick="closeDrawer()">Links</a>
+      <a href="https://yoshikawa-bot.github.io/termos" class="drawer-link" onclick="closeDrawer()">Termos de uso</a>
+      <div class="drawer-divider"></div>
+      <a href="https://wa.me/554896989549" class="drawer-support">
+        <span class="drawer-support-dot"></span>
+        <span class="drawer-support-text">Suporte via WhatsApp</span>
+      </a>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-logo">
+        <div class="nav-logo">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16" style="width: 18px; height: 18px; color: #e8e3d5;">
+    <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
+  </svg>
+</div>
+        <span class="nav-name">Yoshikawa ESM</span>
+      </div>
+
+      <div class="nav-center">
+        <a href="#planos" class="nav-link">Planos</a>
+        <a href="#links" class="nav-link">Links</a>
+        <a href="https://yoshikawa-bot.github.io/termos" class="nav-link">Termos</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="https://wa.me/554896989549" class="nav-support">
+          <span class="nav-support-dot"></span>
+          <span class="nav-support-text">Suporte</span>
+        </a>
+      </div>
+
+      <button class="hamburger" id="hamburger" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="hero">
+      <h1 class="hero-title">Automação completa<br>para o seu <em>grupo</em></h1>
+      <p class="hero-desc">Gerencie membros, distribua moedas e ofereça funções VIP com um bot completo no seu WhatsApp.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="window.open('https://pixgg.com/kawalyansky', '_blank')">Alugar agora</button>
+        <button class="btn-outline" onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})">Ver planos</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" id="planos">
+      <p class="section-label">Planos disponíveis</p>
+
+      <div class="notice">
+        <div class="notice-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="notice-text">
+          Após realizar o pagamento, envie o comprovante diretamente para o <a href="https://wa.me/554896989549">Suporte</a> via <a href="https://wa.me/554896989549">WhatsApp</a>. O acesso é liberado após a confirmação.
+        </div>
+      </div>
+
+      <div class="plans">
+        <div class="plan-card featured">
+          <div class="plan-badge">Mais popular</div>
+          <div class="plan-name">Aluguel do bot</div>
+          <div class="plan-price">R$14,99</div>
+          <div class="plan-validity">por mês</div>
+          <div class="plan-desc">Adicione o bot em 1 grupo com VIP ilimitado para o contratante.</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Bot próprio</div>
+          <div class="plan-price">R$24,99</div>
+          <div class="plan-validity">por mês</div>
+          <div class="plan-desc">Conecte o bot a um número seu e adicione onde quiser, sendo dono completo.</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Status VIP</div>
+          <div class="plan-price">R$1,99</div>
+          <div class="plan-validity">por mês</div>
+          <div class="plan-desc">Acesso a comandos e funções exclusivas via !menuvip.</div>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">500k Moedas</div>
+          <div class="plan-price">R$1,00</div>
+          <div class="plan-validity">permanente</div>
+          <div class="plan-desc">Quinhentas mil moedas adicionadas direto ao seu saldo em !moedas.</div>
+        </div>
+      </div>
+
+      <div class="thanks">
+        <div class="thanks-title">Obrigado por <em>apoiar</em> o projeto</div>
+        <p class="thanks-desc">Cada apoio contribui diretamente para manter o bot ativo e em constante evolução. Isso significa muito para nós.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section" id="links">
+      <p class="section-label">Links e contato</p>
+      <div class="links-grid">
+        <a href="https://wa.me/554896989549" class="link-item support">
+          <div class="link-icon gold">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          </div>
+          <div>
+            <div class="link-label gold">Suporte</div>
+            <div class="link-sub">WhatsApp</div>
+          </div>
+        </a>
+        <a href="https://pixgg.com/kawalyansky" class="link-item">
+          <div class="link-icon dim">
+            <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+          </div>
+          <div>
+            <div class="link-label">Alugar / Apoiar</div>
+            <div class="link-sub">pixgg.com</div>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/kawalyansky" class="link-item">
+          <div class="link-icon dim">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div>
+            <div class="link-label">Instagram</div>
+            <div class="link-sub">@kawalyansky</div>
+          </div>
+        </a>
+        <a href="https://github.com/kawa-lyansky" class="link-item">
+          <div class="link-icon dim">
+            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </div>
+          <div>
+            <div class="link-label">GitHub</div>
+            <div class="link-sub">kawa-lyansky</div>
+          </div>
+        </a>
+        <a href="https://m.youtube.com/@yoshikawa-bot" class="link-item">
+          <div class="link-icon dim">
+            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#b5a98a" stroke="none"/></svg>
+          </div>
+          <div>
+            <div class="link-label">YouTube</div>
+            <div class="link-sub">@yoshikawa-bot</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p class="footer-text">
+        Yoshikawa ESM · Desenvolvido por <a href="https://github.com/kawa-lyansky">@kawalyansky</a><br>
+        <a href="https://yoshikawa-bot.github.io/termos">Termos de uso</a> · <a href="https://akyronhost.com/">Akyron Host</a> · <a href="mailto:yoshikawa_bot@proton.me">yoshikawa_bot@proton.me</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function toggleDrawer() {
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
+    }
+    
+    function closeDrawer() {
+      document.getElementById('drawer').classList.remove('open');
+      document.getElementById('overlay').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+
+    window.addEventListener('click', function(e) {
+      const drawer = document.getElementById('drawer');
+      const hamburger = document.getElementById('hamburger');
+      if (drawer.classList.contains('open') && !drawer.contains(e.target) && !hamburger.contains(e.target)) {
+        closeDrawer();
+      }
+    });
+  </script>
+</body>
+  </html>
