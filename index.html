@@ -38,34 +38,22 @@
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 0;
       flex-shrink: 0;
     }
     
-    .nav-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      background: rgba(232, 227, 213, 0.08);
-      border: 0.5px solid rgba(232, 227, 213, 0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .nav-icon svg {
-      width: 14px;
-      height: 14px;
-      fill: none;
-      stroke: #FAF9F5;
-      stroke-width: 1.5;
-    }
-    
     .nav-name {
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.02em;
+      font-family: 'Instrument Serif', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
       color: #FAF9F5;
+    }
+    
+    .nav-name .highlight {
+      color: #DB7757;
+      font-style: normal;
+      font-weight: 700;
     }
     
     .nav-center {
@@ -212,9 +200,9 @@
       align-items: center;
       gap: 8px;
       background: rgba(218, 119, 87, 0.12);
-      border: 0.5px solid rgba(181, 169, 138, 0.25);
+      border: none;
       border-radius: 6px;
-      padding: 10px 12px;
+      padding: 12px 14px;
       text-decoration: none;
       margin-top: 8px;
     }
@@ -247,7 +235,7 @@
     .hero-title {
       font-family: 'Instrument Serif', serif;
       font-size: clamp(2.2rem, 6vw, 3.8rem);
-      font-weight: 400;
+      font-weight: 700;
       line-height: 1.15;
       color: #FAF9F5;
       margin-bottom: 1.25rem;
@@ -259,6 +247,7 @@
     .hero-title em {
       font-style: italic;
       color: #DB7757;
+      font-weight: 700;
     }
     
     .hero-desc {
@@ -324,12 +313,12 @@
     }
     
     .section-label {
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      color: #9D9A93;
-      text-transform: uppercase;
+      font-family: 'Instrument Serif', serif;
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: #FAF9F5;
       margin-bottom: 1.5rem;
-      font-weight: 500;
     }
     
     .notice {
@@ -383,18 +372,17 @@
     
     .plan-card {
       background: #30302E;
-      border: 0.5px solid rgba(232, 227, 213, 0.1);
+      border: none;
       border-radius: 10px;
-      padding: 1.25rem;
-      transition: border-color .2s;
+      padding: 1.5rem 1.25rem;
+      transition: background .2s;
     }
     
     .plan-card:hover {
-      border-color: rgba(218, 119, 87, 0.20);
+      background: #383734;
     }
     
     .plan-card.featured {
-      border-color: rgba(218, 119, 87, 0.20);
       background: rgba(218, 119, 87, 0.12);
     }
     
@@ -420,7 +408,8 @@
     
     .plan-price {
       font-family: 'Instrument Serif', serif;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
+      font-weight: 700;
       color: #FAF9F5;
       margin-bottom: 2px;
     }
@@ -441,16 +430,17 @@
     
     .thanks {
       background: rgba(218, 119, 87, 0.12);
-      border: 0.5px solid rgba(181, 169, 138, 0.18);
+      border: none;
       border-radius: 10px;
-      padding: 1.5rem;
+      padding: 1.8rem 1.5rem;
       text-align: center;
       margin-top: 1.5rem;
     }
     
     .thanks-title {
       font-family: 'Instrument Serif', serif;
-      font-size: 1.3rem;
+      font-size: 1.5rem;
+      font-weight: 700;
       color: #FAF9F5;
       margin-bottom: 6px;
     }
@@ -458,6 +448,7 @@
     .thanks-title em {
       font-style: italic;
       color: #DB7757;
+      font-weight: 700;
     }
     
     .thanks-desc {
@@ -478,64 +469,30 @@
     .link-item {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       background: #30302E;
-      border: 0.5px solid rgba(232, 227, 213, 0.08);
+      border: none;
       border-radius: 8px;
-      padding: 0.85rem 1rem;
+      padding: 1rem 1.2rem;
       text-decoration: none;
-      transition: border-color .2s, background .2s;
+      transition: background .2s;
     }
     
     .link-item:hover {
-      border-color: rgba(218, 119, 87, 0.20);
-      background: rgba(232, 227, 213, 0.06);
+      background: #383734;
     }
     
-    .link-item.support {
-      border-color: rgba(218, 119, 87, 0.20);
-      background: rgba(218, 119, 87, 0.12);
-    }
-    
-    .link-item.support:hover {
-      background: #9D9A93;
-    }
-    
-    .link-icon {
-      width: 30px;
-      height: 30px;
+    .link-icon-img {
+      width: 32px;
+      height: 32px;
       border-radius: 6px;
-      background: rgba(232, 227, 213, 0.07);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
     }
     
-    .link-icon.gold {
-      background: rgba(218, 119, 87, 0.12);
-    }
-    
-    .link-icon svg {
-      width: 14px;
-      height: 14px;
-      stroke: #DB7757;
-      fill: none;
-      stroke-width: 1.5;
-    }
-    
-    .link-icon.dim svg {
-      stroke: #9D9A93;
-    }
-    
     .link-label {
-      font-size: 12.5px;
+      font-size: 13px;
       color: #FAF9F5;
       font-weight: 400;
-    }
-    
-    .link-label.gold {
-      color: #DB7757;
     }
     
     .link-sub {
@@ -565,6 +522,12 @@
       color: rgba(232, 227, 213, 0.6);
     }
     
+    .footer-credit {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: #DB7757;
+    }
+    
     @media (max-width: 640px) {
       .nav-center,
       .nav-right {
@@ -589,17 +552,13 @@
       <div class="drawer-divider"></div>
       <a href="https://wa.me/554896989549" class="drawer-support">
         <span class="drawer-support-dot"></span>
-        <span class="drawer-support-text">Suporte via WhatsApp</span>
+        <span class="drawer-support-text">Suporte no WhatsApp</span>
       </a>
     </div>
 
     <nav class="nav">
       <div class="nav-logo">
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-fill" viewBox="0 0 16 16" style="width: 18px; height: 18px; color: #DB7757;">
-    <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-  </svg>
-        
-  <span class="nav-name">Yoshikawa ESM</span>
+        <span class="nav-name">Yoshikawa <span class="highlight">ESM</span></span>
       </div>
 
       <div class="nav-center">
@@ -622,7 +581,7 @@
 
     <div class="hero">
       <h1 class="hero-title">Automação completa<br>para o seu <em>grupo</em></h1>
-      <p class="hero-desc">Gerencie membros, distribua moedas e ofereça funções VIP com um bot completo no seu WhatsApp.</p>
+      <p class="hero-desc">Gerencie membros, faça figurinhas, baixe músicas, jogue jogos, utilize comandos VIP e mais outras 500 funcões.</p>
       <div class="hero-actions">
         <button class="btn-primary" onclick="window.open('https://pixgg.com/kawalyansky', '_blank')">Alugar agora</button>
         <button class="btn-outline" onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})">Ver planos</button>
@@ -639,13 +598,13 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
         <div class="notice-text">
-          Após realizar o pagamento no valor do serviço escolhido, envie o comprovante diretamente para o <a href="https://wa.me/554896989549">Suporte</a> via <a href="https://wa.me/554896989549">WhatsApp</a>. O acesso é liberado após a confirmação.
+          Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o <a href="https://wa.me/554896989549">Suporte</a> via <a href="https://wa.me/554896989549">WhatsApp</a>. O acesso é liberado logo após a confirmação.
         </div>
       </div>
 
       <div class="plans">
         <div class="plan-card featured">
-          <div class="plan-badge">Mais popular</div>
+          <div class="plan-badge">FAVORITO</div>
           <div class="plan-name">Aluguel do bot</div>
           <div class="plan-price">R$14,99</div>
           <div class="plan-validity">mensal</div>
@@ -682,46 +641,36 @@
     <div class="section" id="links">
       <p class="section-label">Links e contato</p>
       <div class="links-grid">
-        <a href="https://wa.me/554896989549" class="link-item support">
-          <div class="link-icon gold">
-            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
-          </div>
+        <a href="https://wa.me/554896989549" class="link-item">
+          <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="WhatsApp" class="link-icon-img">
           <div>
-            <div class="link-label gold">Suporte</div>
+            <div class="link-label">Suporte</div>
             <div class="link-sub">WhatsApp</div>
           </div>
         </a>
         <a href="https://pixgg.com/kawalyansky" class="link-item">
-          <div class="link-icon dim">
-            <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-          </div>
+          <img src="https://yoshikawa-bot.github.io/cache/images/e5e9381b.png" alt="PixGG" class="link-icon-img">
           <div>
             <div class="link-label">Alugar / Apoiar</div>
             <div class="link-sub">pixgg.com</div>
           </div>
         </a>
         <a href="https://www.instagram.com/kawalyansky" class="link-item">
-          <div class="link-icon dim">
-            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          </div>
+          <img src="https://yoshikawa-bot.github.io/cache/images/c47a87a7.png" alt="Instagram" class="link-icon-img">
           <div>
             <div class="link-label">Instagram</div>
             <div class="link-sub">@kawalyansky</div>
           </div>
         </a>
         <a href="https://github.com/kawa-lyansky" class="link-item">
-          <div class="link-icon dim">
-            <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-          </div>
+          <img src="https://yoshikawa-bot.github.io/cache/images/4cedbc84.png" alt="GitHub" class="link-icon-img">
           <div>
             <div class="link-label">GitHub</div>
             <div class="link-sub">kawa-lyansky</div>
           </div>
         </a>
         <a href="https://m.youtube.com/@yoshikawa-bot" class="link-item">
-          <div class="link-icon dim">
-            <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#DB7757" stroke="none"/></svg>
-          </div>
+          <img src="https://yoshikawa-bot.github.io/cache/images/2edc4be0.png" alt="YouTube" class="link-icon-img">
           <div>
             <div class="link-label">YouTube</div>
             <div class="link-sub">@yoshikawa-bot</div>
@@ -732,7 +681,7 @@
 
     <div class="footer">
       <p class="footer-text">
-        Yoshikawa ESM · Desenvolvido por <a href="https://github.com/kawa-lyansky">@kawalyansky</a><br>
+        Yoshikawa ESM · Desenvolvida por <a href="https://github.com/kawa-lyansky"><span class="footer-credit">@kawalyansky</span></a><br>
         <a href="https://yoshikawa-bot.github.io/termos">Termos de uso</a> · <a href="https://akyronhost.com/">Akyron Host</a> · <a href="mailto:yoshikawa_bot@proton.me">yoshikawa_bot@proton.me</a>
       </p>
     </div>
@@ -760,4 +709,4 @@
     });
   </script>
 </body>
-</html>
+          </html>
