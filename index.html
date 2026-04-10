@@ -12,6 +12,10 @@
       margin: 0;
       padding: 0;
     }
+
+    :root {
+      color-scheme: light only;
+    }
     
     html {
       scroll-behavior: smooth;
@@ -207,11 +211,10 @@
       margin-top: 8px;
     }
     
-    .drawer-support-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #DB7757;
+    .drawer-support-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
       flex-shrink: 0;
     }
     
@@ -326,9 +329,8 @@
       align-items: flex-start;
       gap: 12px;
       background: #30302E;
-      border: 0.5px solid #434240;
       border-radius: 8px;
-      padding: 1rem 1.1rem;
+      padding: 1.4rem 1.5rem;
       margin-bottom: 1.5rem;
     }
     
@@ -551,8 +553,8 @@
       <a href="https://yoshikawa-bot.github.io/termos" class="drawer-link" onclick="closeDrawer()">Termos de uso</a>
       <div class="drawer-divider"></div>
       <a href="https://wa.me/554896989549" class="drawer-support">
-        <span class="drawer-support-dot"></span>
-        <span class="drawer-support-text">Suporte no WhatsApp</span>
+        <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="WhatsApp" class="drawer-support-icon">
+        <span class="drawer-support-text">Suporte</span>
       </a>
     </div>
 
@@ -598,7 +600,7 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
         <div class="notice-text">
-          Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o <a href="https://wa.me/554896989549">Suporte</a> via <a href="https://wa.me/554896989549">WhatsApp</a>. O acesso é liberado logo após a confirmação.
+          Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o Suporte via WhatsApp. O acesso é liberado logo após a confirmação.
         </div>
       </div>
 
@@ -709,4 +711,4 @@
     });
   </script>
 </body>
-          </html>
+</html>
