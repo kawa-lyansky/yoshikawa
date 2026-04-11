@@ -35,8 +35,10 @@
       justify-content: space-between;
       padding: 1.1rem 2rem;
       border-bottom: 0.5px solid rgba(232, 227, 213, 0.1);
-      position: relative;
+      position: sticky;
+      top: 0;
       z-index: 100;
+      background-color: #262624;
     }
     
     .nav-logo {
@@ -127,6 +129,12 @@
       padding: 4px;
       background: transparent;
       border: none;
+      position: fixed;
+      top: 1.1rem;
+      right: 1.25rem;
+      z-index: 300;
+      height: 27.7px;
+      justify-content: center;
     }
     
     .hamburger span {
@@ -157,7 +165,6 @@
       width: 260px;
       height: 100vh;
       background: #1F1E1C;
-      border-left: 0.5px solid rgba(232, 227, 213, 0.1);
       z-index: 200;
       transition: right .3s ease;
       padding: 5rem 1.5rem 2rem;
@@ -178,7 +185,6 @@
       height: 3.85rem;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       padding: 0 1.5rem;
     }
 
@@ -188,32 +194,6 @@
       font-weight: 700;
       letter-spacing: 0.01em;
       color: #FAF9F5;
-    }
-
-    .drawer-close {
-      display: flex;
-      flex-direction: column;
-      gap: 4.5px;
-      cursor: pointer;
-      padding: 4px;
-      background: transparent;
-      border: none;
-    }
-
-    .drawer-close span {
-      display: block;
-      width: 20px;
-      height: 1.5px;
-      background: #FAF9F5;
-      border-radius: 2px;
-    }
-
-    .drawer-close span:nth-child(1) {
-      transform: translateY(3px) rotate(45deg);
-    }
-
-    .drawer-close span:nth-child(2) {
-      transform: translateY(-3px) rotate(-45deg);
     }
 
     .drawer-header-line {
@@ -597,6 +577,12 @@
         padding: 1.1rem 1.25rem;
       }
     }
+
+    @media (min-width: 641px) {
+      .hamburger {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -605,9 +591,6 @@
     <div class="drawer" id="drawer">
       <div class="drawer-header">
         <span class="drawer-title">Menu</span>
-        <button class="drawer-close" onclick="closeDrawer()">
-          <span></span><span></span>
-        </button>
       </div>
       <div class="drawer-header-line"></div>
       <a href="#planos" class="drawer-link" onclick="closeDrawer()">Planos</a>
@@ -619,6 +602,10 @@
         <span class="drawer-support-text">Suporte</span>
       </a>
     </div>
+
+    <button class="hamburger" id="hamburger" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </button>
 
     <nav class="nav">
       <div class="nav-logo">
@@ -635,9 +622,6 @@
           <span class="nav-support-text">Suporte</span>
         </a>
       </div>
-      <button class="hamburger" id="hamburger" onclick="toggleDrawer()">
-        <span></span><span></span><span></span>
-      </button>
     </nav>
 
     <div class="hero">
