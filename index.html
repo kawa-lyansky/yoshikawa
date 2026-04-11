@@ -4,10 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yoshikawa ESM · Bot para WhatsApp</title>
-  <meta name="description" content="Bot para WhatsApp com mais de 500 funções: figurinhas, músicas, jogos, comandos VIP e gestão de grupos. Alugue agora.">
-  <meta property="og:title" content="Yoshikawa ESM · Bot para WhatsApp">
-  <meta property="og:description" content="Bot para WhatsApp com mais de 500 funções: figurinhas, músicas, jogos, comandos VIP e gestão de grupos.">
-  <meta property="og:type" content="website">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
     
@@ -339,39 +335,11 @@
       cursor: pointer;
       font-family: 'DM Sans', sans-serif;
       letter-spacing: 0.01em;
-      transition: background 0.2s, opacity 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      transition: background 0.2s;
     }
     
     .btn-primary:hover {
       background: #d4cfc0;
-    }
-
-    .btn-primary:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      background: #FAF9F5;
-    }
-
-    .btn-spinner {
-      width: 13px;
-      height: 13px;
-      border: 1.5px solid rgba(26, 25, 21, 0.3);
-      border-top-color: #1a1915;
-      border-radius: 50%;
-      animation: spin .6s linear infinite;
-      display: none;
-      flex-shrink: 0;
-    }
-
-    .btn-primary.loading .btn-spinner {
-      display: block;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
     }
     
     .btn-outline {
@@ -628,19 +596,16 @@
       .nav {
         padding: 1.1rem 1.25rem;
       }
-      .plans {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
   </style>
 </head>
 <body>
   <div class="page" id="page">
     <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
-    <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu de navegação">
+    <div class="drawer" id="drawer">
       <div class="drawer-header">
         <span class="drawer-title">Menu</span>
-        <button class="drawer-close" onclick="closeDrawer()" aria-label="Fechar menu">
+        <button class="drawer-close" onclick="closeDrawer()">
           <span></span><span></span>
         </button>
       </div>
@@ -649,7 +614,7 @@
       <a href="#links" class="drawer-link" onclick="closeDrawer()">Links</a>
       <a href="https://yoshikawa-bot.github.io/termos" class="drawer-link" onclick="closeDrawer()">Termos de uso</a>
       <div class="drawer-divider"></div>
-      <a href="https://wa.me/554896989549" class="drawer-support" target="_blank" rel="noopener noreferrer">
+      <a href="https://wa.me/554896989549" class="drawer-support">
         <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="WhatsApp" class="drawer-support-icon">
         <span class="drawer-support-text">Suporte</span>
       </a>
@@ -665,24 +630,21 @@
         <a href="https://yoshikawa-bot.github.io/termos" class="nav-link">Termos</a>
       </div>
       <div class="nav-right">
-        <a href="https://wa.me/554896989549" class="nav-support" target="_blank" rel="noopener noreferrer">
+        <a href="https://wa.me/554896989549" class="nav-support">
           <span class="nav-support-dot"></span>
           <span class="nav-support-text">Suporte</span>
         </a>
       </div>
-      <button class="hamburger" id="hamburger" onclick="toggleDrawer()" aria-label="Abrir menu" aria-expanded="false">
+      <button class="hamburger" id="hamburger" onclick="toggleDrawer()">
         <span></span><span></span><span></span>
       </button>
     </nav>
 
     <div class="hero">
       <h1 class="hero-title">Automação completa<br>para o seu <em>grupo</em></h1>
-      <p class="hero-desc">Gerencie membros, faça figurinhas, baixe músicas, jogue jogos, utilize comandos VIP e mais outras 500 funções.</p>
+      <p class="hero-desc">Gerencie membros, faça figurinhas, baixe músicas, jogue jogos, utilize comandos VIP e mais outras 500 funcões.</p>
       <div class="hero-actions">
-        <button class="btn-primary" id="btnAlugar" onclick="handleAlugar()">
-          <span class="btn-spinner"></span>
-          <span class="btn-label">Alugar agora</span>
-        </button>
+        <button class="btn-primary" onclick="window.open('https://pixgg.com/kawalyansky', '_blank')">Alugar agora</button>
         <button class="btn-outline" onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})">Ver planos</button>
       </div>
     </div>
@@ -696,7 +658,7 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
         <div class="notice-text">
-          Após o pagamento, envie o comprovante via <a href="https://wa.me/554896989549" target="_blank" rel="noopener noreferrer">WhatsApp</a>. O acesso é liberado em até 5 minutos após a confirmação.
+          Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o suporte via <a href="https://wa.me/554896989549" style="color:#DB7757;text-decoration:none;font-weight:500;">WhatsApp</a>. O acesso é liberado logo após a confirmação.
         </div>
       </div>
       <div class="plans">
@@ -737,35 +699,35 @@
     <div class="section" id="links">
       <p class="section-label">Links e contato</p>
       <div class="links-grid">
-        <a href="https://wa.me/554896989549" class="link-item" target="_blank" rel="noopener noreferrer">
+        <a href="https://wa.me/554896989549" class="link-item">
           <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="WhatsApp" class="link-icon-img">
           <div>
             <div class="link-label">Suporte</div>
             <div class="link-sub">WhatsApp</div>
           </div>
         </a>
-        <a href="https://pixgg.com/kawalyansky" class="link-item" target="_blank" rel="noopener noreferrer">
+        <a href="https://pixgg.com/kawalyansky" class="link-item">
           <img src="https://yoshikawa-bot.github.io/cache/images/e5e9381b.png" alt="PixGG" class="link-icon-img">
           <div>
             <div class="link-label">Alugar / Apoiar</div>
             <div class="link-sub">pixgg.com</div>
           </div>
         </a>
-        <a href="https://www.instagram.com/kawalyansky" class="link-item" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.instagram.com/kawalyansky" class="link-item">
           <img src="https://yoshikawa-bot.github.io/cache/images/c47a87a7.png" alt="Instagram" class="link-icon-img">
           <div>
             <div class="link-label">Instagram</div>
             <div class="link-sub">@kawalyansky</div>
           </div>
         </a>
-        <a href="https://github.com/kawa-lyansky" class="link-item" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/kawa-lyansky" class="link-item">
           <img src="https://yoshikawa-bot.github.io/cache/images/4cedbc84.png" alt="GitHub" class="link-icon-img">
           <div>
             <div class="link-label">GitHub</div>
             <div class="link-sub">kawa-lyansky</div>
           </div>
         </a>
-        <a href="https://m.youtube.com/@yoshikawa-bot" class="link-item" target="_blank" rel="noopener noreferrer">
+        <a href="https://m.youtube.com/@yoshikawa-bot" class="link-item">
           <img src="https://yoshikawa-bot.github.io/cache/images/2edc4be0.png" alt="YouTube" class="link-icon-img">
           <div>
             <div class="link-label">YouTube</div>
@@ -777,68 +739,23 @@
 
     <div class="footer">
       <p class="footer-text">
-        Yoshikawa ESM · Desenvolvida por <a href="https://github.com/kawa-lyansky" target="_blank" rel="noopener noreferrer"><span class="footer-credit">@kawalyansky</span></a><br>
-        <a href="https://yoshikawa-bot.github.io/termos">Termos de uso</a> · <a href="https://akyronhost.com/" target="_blank" rel="noopener noreferrer">Akyron Host</a> · <a href="mailto:yoshikawa_bot@proton.me">yoshikawa_bot@proton.me</a>
+        Yoshikawa ESM · Desenvolvida por <a href="https://github.com/kawa-lyansky"><span class="footer-credit">@kawalyansky</span></a><br>
+        <a href="https://yoshikawa-bot.github.io/termos">Termos de uso</a> · <a href="https://akyronhost.com/">Akyron Host</a> · <a href="mailto:yoshikawa_bot@proton.me">yoshikawa_bot@proton.me</a>
       </p>
     </div>
   </div>
 
   <script>
     function toggleDrawer() {
-      const drawer = document.getElementById('drawer');
-      const overlay = document.getElementById('overlay');
-      const hamburger = document.getElementById('hamburger');
-      const isOpening = !drawer.classList.contains('open');
-
-      drawer.classList.toggle('open');
-      overlay.classList.toggle('open');
-      hamburger.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpening);
-
-      if (isOpening) trapFocus(drawer);
+      document.getElementById('drawer').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('open');
     }
-
+    
     function closeDrawer() {
       document.getElementById('drawer').classList.remove('open');
       document.getElementById('overlay').classList.remove('open');
-      const hamburger = document.getElementById('hamburger');
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      hamburger.focus();
-    }
-
-    function trapFocus(el) {
-      const focusable = el.querySelectorAll('a, button, [tabindex]:not([tabindex="-1"])');
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      first && first.focus();
-
-      el.addEventListener('keydown', function handler(e) {
-        if (e.key === 'Escape') {
-          closeDrawer();
-          el.removeEventListener('keydown', handler);
-          return;
-        }
-        if (e.key !== 'Tab') return;
-        if (e.shiftKey) {
-          if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-        } else {
-          if (document.activeElement === last) { e.preventDefault(); first.focus(); }
-        }
-      });
-    }
-
-    function handleAlugar() {
-      const btn = document.getElementById('btnAlugar');
-      if (btn.disabled) return;
-      btn.classList.add('loading');
-      btn.disabled = true;
-      window.open('https://pixgg.com/kawalyansky', '_blank', 'noopener,noreferrer');
-      setTimeout(() => {
-        btn.classList.remove('loading');
-        btn.disabled = false;
-      }, 2000);
+      document.getElementById('hamburger').classList.remove('open');
     }
 
     window.addEventListener('click', function(e) {
