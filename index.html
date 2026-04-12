@@ -6,7 +6,7 @@
   <title>Yoshikawa ESM · Bot para WhatsApp</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
-    
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -14,54 +14,77 @@
     }
 
     :root {
-      color-scheme: light only;
+      color-scheme: light;
+
+      --bg:            #262624;
+      --bg-raised:     #1F1E1C;
+      --bg-card:       #30302E;
+      --bg-card-hover: #383734;
+
+      --text:           #FAF9F5;
+      --text-muted:     #9D9A93;
+      --text-dark:      #1a1915;
+      --text-btn-hover: #d4cfc0;
+      --text-dim:       rgba(232, 227, 213, 0.45);
+      --text-ghost:     rgba(232, 227, 213, 0.22);
+      --text-faint:     rgba(232, 227, 213, 0.38);
+      --text-pale:      rgba(232, 227, 213, 0.6);
+
+      --accent:          #DB7757;
+      --accent-bg:       rgba(219, 119, 87, 0.12);
+      --accent-bg-hover: rgba(219, 119, 87, 0.2);
+
+      --border:      rgba(232, 227, 213, 0.08);
+      --border-nav:  rgba(232, 227, 213, 0.1);
+      --border-btn:  rgba(232, 227, 213, 0.3);
+      --hover-bg:    rgba(232, 227, 213, 0.07);
     }
-    
+
     html {
       scroll-behavior: smooth;
     }
-    
+
     .page {
-      background: #262624;
-      color: #FAF9F5;
+      background: var(--bg);
+      color: var(--text);
       font-family: 'DM Sans', sans-serif;
       min-height: 100vh;
       padding: 0 0 3rem;
     }
-    
+
     .nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 1.1rem 2rem;
-      border-bottom: 0.5px solid rgba(232, 227, 213, 0.1);
+      border-bottom: 0.5px solid var(--border-nav);
       position: sticky;
       top: 0;
       z-index: 100;
-      background-color: #262624;
+      background-color: var(--bg);
     }
-    
+
     .nav-logo {
       display: flex;
       align-items: center;
       gap: 0;
       flex-shrink: 0;
     }
-    
+
     .nav-name {
       font-family: 'Instrument Serif', serif;
       font-size: 22px;
       font-weight: 700;
       letter-spacing: 0.01em;
-      color: #FAF9F5;
+      color: var(--text);
     }
-    
+
     .nav-name .highlight {
-      color: #DB7757;
+      color: var(--accent);
       font-style: normal;
       font-weight: 700;
     }
-    
+
     .nav-center {
       position: absolute;
       left: 50%;
@@ -69,58 +92,58 @@
       display: flex;
       gap: 0.25rem;
     }
-    
+
     .nav-link {
       font-size: 13px;
-      color: #9D9A93;
+      color: var(--text-muted);
       text-decoration: none;
       padding: 5px 12px;
       border-radius: 5px;
       transition: color .2s, background .2s;
     }
-    
+
     .nav-link:hover {
-      color: #FAF9F5;
-      background: rgba(232, 227, 213, 0.07);
+      color: var(--text);
+      background: var(--hover-bg);
     }
-    
+
     .nav-right {
       display: flex;
       align-items: center;
       gap: 10px;
       flex-shrink: 0;
     }
-    
+
     .nav-support {
       display: flex;
       align-items: center;
       gap: 7px;
-      background: rgba(218, 119, 87, 0.12);
+      background: var(--accent-bg);
       border: none;
       border-radius: 6px;
       padding: 5px 12px;
       text-decoration: none;
       transition: background .2s;
     }
-    
+
     .nav-support:hover {
-      background: rgba(218, 119, 87, 0.2);
+      background: var(--accent-bg-hover);
     }
-    
+
     .nav-support-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #DB7757;
+      background: var(--accent);
       flex-shrink: 0;
     }
-    
+
     .nav-support-text {
       font-size: 12.5px;
-      color: #DB7757;
+      color: var(--accent);
       font-weight: 500;
     }
-    
+
     .hamburger {
       display: none;
       flex-direction: column;
@@ -136,35 +159,35 @@
       height: 27.7px;
       justify-content: center;
     }
-    
+
     .hamburger span {
       display: block;
       width: 20px;
       height: 1.5px;
-      background: #FAF9F5;
+      background: var(--text);
       border-radius: 2px;
       transition: all .25s;
     }
-    
+
     .hamburger.open span:nth-child(1) {
       transform: translateY(6px) rotate(45deg);
     }
-    
+
     .hamburger.open span:nth-child(2) {
       opacity: 0;
     }
-    
+
     .hamburger.open span:nth-child(3) {
       transform: translateY(-6px) rotate(-45deg);
     }
-    
+
     .drawer {
       position: fixed;
       top: 0;
       right: -280px;
       width: 260px;
       height: 100vh;
-      background: #1F1E1C;
+      background: var(--bg-raised);
       z-index: 200;
       transition: right .3s ease;
       padding: 5rem 1.5rem 2rem;
@@ -172,7 +195,7 @@
       flex-direction: column;
       gap: 6px;
     }
-    
+
     .drawer.open {
       right: 0;
     }
@@ -193,7 +216,7 @@
       font-size: 22px;
       font-weight: 700;
       letter-spacing: 0.01em;
-      color: #FAF9F5;
+      color: var(--text);
     }
 
     .drawer-header-line {
@@ -202,9 +225,9 @@
       left: 1.5rem;
       right: 1.5rem;
       height: 0.5px;
-      background: rgba(232, 227, 213, 0.08);
+      background: var(--border);
     }
-    
+
     .drawer-overlay {
       position: fixed;
       inset: 0;
@@ -214,99 +237,100 @@
       pointer-events: none;
       transition: opacity .3s;
     }
-    
+
     .drawer-overlay.open {
       opacity: 1;
-      pointer-events: all;
+      pointer-events: auto;
     }
-    
+
     .drawer-link {
       font-size: 14px;
-      color: rgba(232, 227, 213, 0.6);
+      color: var(--text-pale);
       text-decoration: none;
       padding: 10px 12px;
       border-radius: 6px;
       transition: color .2s, background .2s;
     }
-    
+
     .drawer-link:hover {
-      color: #FAF9F5;
-      background: rgba(232, 227, 213, 0.07);
+      color: var(--text);
+      background: var(--hover-bg);
     }
-    
+
     .drawer-support {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(218, 119, 87, 0.12);
+      background: var(--accent-bg);
       border: none;
       border-radius: 6px;
       padding: 12px 14px;
       text-decoration: none;
       margin-top: 8px;
     }
-    
+
     .drawer-support-icon {
       width: 18px;
       height: 18px;
       border-radius: 4px;
       flex-shrink: 0;
     }
-    
+
     .drawer-support-text {
       font-size: 13px;
-      color: #DB7757;
+      color: var(--accent);
       font-weight: 500;
     }
-    
+
     .drawer-divider {
       height: 0.5px;
-      background: rgba(232, 227, 213, 0.08);
+      background: var(--border);
       margin: 8px 0;
     }
-    
+
     .hero {
       text-align: center;
       padding: 4.5rem 2rem 3rem;
     }
-    
+
     .hero-title {
       font-family: 'Instrument Serif', serif;
       font-size: clamp(2.2rem, 6vw, 3.8rem);
       font-weight: 700;
       line-height: 1.15;
-      color: #FAF9F5;
+      color: var(--text);
       margin-bottom: 1.25rem;
       max-width: 640px;
       margin-left: auto;
       margin-right: auto;
     }
-    
+
     .hero-title em {
       font-style: italic;
-      color: #DB7757;
+      color: var(--accent);
       font-weight: 700;
     }
-    
+
     .hero-desc {
       font-size: 15px;
-      color: #9D9A93;
+      color: var(--text-muted);
       max-width: 440px;
       margin: 0 auto 2.5rem;
       line-height: 1.7;
       font-weight: 300;
     }
-    
+
     .hero-actions {
       display: flex;
       gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
     }
-    
+
     .btn-primary {
-      background: #FAF9F5;
-      color: #1a1915;
+      display: inline-block;
+      background: var(--text);
+      color: var(--text-dark);
       border: none;
       padding: 10px 22px;
       border-radius: 6px;
@@ -315,256 +339,259 @@
       cursor: pointer;
       font-family: 'DM Sans', sans-serif;
       letter-spacing: 0.01em;
+      text-decoration: none;
       transition: background 0.2s;
     }
-    
+
     .btn-primary:hover {
-      background: #d4cfc0;
+      background: var(--text-btn-hover);
     }
-    
+
     .btn-outline {
+      display: inline-block;
       background: transparent;
-      color: #FAF9F5;
-      border: 0.5px solid rgba(232, 227, 213, 0.3);
+      color: var(--text);
+      border: 0.5px solid var(--border-btn);
       padding: 10px 22px;
       border-radius: 6px;
       font-size: 14px;
       font-weight: 400;
       cursor: pointer;
       font-family: 'DM Sans', sans-serif;
+      text-decoration: none;
       transition: background 0.2s, border-color 0.2s;
     }
-    
+
     .btn-outline:hover {
-      background: rgba(232, 227, 213, 0.05);
-      border-color: #9D9A93;
+      background: var(--hover-bg);
+      border-color: var(--text-muted);
     }
-    
+
     .divider {
       height: 0.5px;
-      background: rgba(232, 227, 213, 0.08);
+      background: var(--border);
       margin: 0 2rem;
     }
-    
+
     .section {
       padding: 2.5rem 2rem;
     }
-    
+
     .section-label {
       font-family: 'Instrument Serif', serif;
       font-size: 20px;
       font-weight: 400;
       letter-spacing: 0.02em;
-      color: #FAF9F5;
+      color: var(--text);
       margin-bottom: 1.5rem;
     }
-    
+
     .notice {
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      background: #30302E;
+      background: var(--bg-card);
       border-radius: 8px;
       padding: 1.4rem 1.5rem;
       margin-bottom: 1.5rem;
     }
-    
+
     .notice-icon {
       flex-shrink: 0;
       width: 18px;
       height: 18px;
       margin-top: 1px;
     }
-    
+
     .notice-icon svg {
       width: 18px;
       height: 18px;
-      stroke: #DB7757;
+      stroke: var(--accent);
       fill: none;
       stroke-width: 1.5;
     }
-    
+
     .notice-text {
       font-size: 13px;
-      color: #9D9A93;
+      color: var(--text-muted);
       line-height: 1.65;
       font-weight: 300;
     }
-    
+
     .notice-text a {
-      color: #DB7757;
+      color: var(--accent);
       text-decoration: none;
       font-weight: 500;
     }
-    
+
     .notice-text a:hover {
       text-decoration: underline;
     }
-    
+
     .plans {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 12px;
     }
-    
+
     .plan-card {
-      background: #30302E;
+      background: var(--bg-card);
       border: none;
       border-radius: 10px;
       padding: 1.5rem 1.25rem;
       transition: background .2s;
     }
-    
+
     .plan-card:hover {
-      background: #383734;
+      background: var(--bg-card-hover);
     }
-    
+
     .plan-card.featured {
-      background: rgba(218, 119, 87, 0.12);
+      background: var(--accent-bg);
     }
-    
+
     .plan-badge {
       display: inline-block;
       font-size: 10px;
       letter-spacing: 0.06em;
-      color: #DA7757;
-      background: rgba(218, 119, 87, 0.12);
+      color: var(--accent);
+      background: var(--accent-bg);
       padding: 2px 8px;
       border-radius: 99px;
       margin-bottom: 8px;
       font-weight: 500;
       text-transform: uppercase;
     }
-    
+
     .plan-name {
       font-size: 13px;
       font-weight: 500;
-      color: #FAF9F5;
+      color: var(--text);
       margin-bottom: 4px;
     }
-    
+
     .plan-price {
       font-family: 'Instrument Serif', serif;
       font-size: 1.8rem;
       font-weight: 700;
-      color: #FAF9F5;
+      color: var(--text);
       margin-bottom: 2px;
     }
-    
+
     .plan-validity {
       font-size: 11px;
-      color: #DB7757;
+      color: var(--accent);
       margin-bottom: 10px;
       letter-spacing: 0.03em;
     }
-    
+
     .plan-desc {
       font-size: 12.5px;
-      color: rgba(232, 227, 213, 0.45);
+      color: var(--text-dim);
       line-height: 1.6;
       font-weight: 300;
     }
-    
+
     .thanks {
-      background: rgba(218, 119, 87, 0.12);
+      background: var(--accent-bg);
       border: none;
       border-radius: 10px;
       padding: 1.8rem 1.5rem;
       text-align: center;
       margin-top: 1.5rem;
     }
-    
+
     .thanks-title {
       font-family: 'Instrument Serif', serif;
       font-size: 1.5rem;
       font-weight: 700;
-      color: #FAF9F5;
+      color: var(--text);
       margin-bottom: 6px;
     }
-    
+
     .thanks-title em {
       font-style: italic;
-      color: #DB7757;
+      color: var(--accent);
       font-weight: 700;
     }
-    
+
     .thanks-desc {
       font-size: 13px;
-      color: rgba(232, 227, 213, 0.45);
+      color: var(--text-dim);
       line-height: 1.65;
       font-weight: 300;
       max-width: 400px;
       margin: 0 auto;
     }
-    
+
     .links-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 10px;
     }
-    
+
     .link-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      background: #30302E;
+      background: var(--bg-card);
       border: none;
       border-radius: 8px;
       padding: 1rem 1.2rem;
       text-decoration: none;
       transition: background .2s;
     }
-    
+
     .link-item:hover {
-      background: #383734;
+      background: var(--bg-card-hover);
     }
-    
+
     .link-icon-img {
       width: 32px;
       height: 32px;
       border-radius: 6px;
       flex-shrink: 0;
     }
-    
+
     .link-label {
       font-size: 13px;
-      color: #FAF9F5;
+      color: var(--text);
       font-weight: 400;
     }
-    
+
     .link-sub {
       font-size: 11px;
-      color: #9D9A93;
+      color: var(--text-muted);
     }
-    
+
     .footer {
       text-align: center;
       padding: 2rem;
-      border-top: 0.5px solid rgba(232, 227, 213, 0.07);
+      border-top: 0.5px solid var(--hover-bg);
       margin-top: 1rem;
     }
-    
+
     .footer-text {
       font-size: 12px;
-      color: rgba(232, 227, 213, 0.22);
+      color: var(--text-ghost);
       line-height: 1.9;
     }
-    
+
     .footer-text a {
-      color: rgba(232, 227, 213, 0.38);
+      color: var(--text-faint);
       text-decoration: none;
     }
-    
+
     .footer-text a:hover {
-      color: rgba(232, 227, 213, 0.6);
+      color: var(--text-pale);
     }
-    
+
     .footer-credit {
       font-family: 'Instrument Serif', serif;
       font-style: italic;
-      color: #DB7757;
+      color: var(--accent);
     }
-    
+
     @media (max-width: 640px) {
       .nav-center,
       .nav-right {
@@ -587,23 +614,23 @@
 </head>
 <body>
   <div class="page" id="page">
-    <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
+    <div class="drawer-overlay" id="overlay"></div>
     <div class="drawer" id="drawer">
       <div class="drawer-header">
         <span class="drawer-title">Menu</span>
       </div>
       <div class="drawer-header-line"></div>
-      <a href="#planos" class="drawer-link" onclick="closeDrawer()">Planos</a>
-      <a href="#links" class="drawer-link" onclick="closeDrawer()">Links</a>
-      <a href="https://yoshikawa-bot.github.io/termos" class="drawer-link" onclick="closeDrawer()">Termos de uso</a>
+      <a href="#planos" class="drawer-link">Planos</a>
+      <a href="#links" class="drawer-link">Links</a>
+      <a href="https://yoshikawa-bot.github.io/termos" class="drawer-link" rel="noopener noreferrer">Termos de uso</a>
       <div class="drawer-divider"></div>
-      <a href="https://wa.me/554896989549" class="drawer-support">
+      <a href="https://wa.me/554896989549" class="drawer-support" rel="noopener noreferrer">
         <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="WhatsApp" class="drawer-support-icon">
         <span class="drawer-support-text">Suporte</span>
       </a>
     </div>
 
-    <button class="hamburger" id="hamburger" onclick="toggleDrawer()">
+    <button type="button" class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
 
@@ -614,10 +641,10 @@
       <div class="nav-center">
         <a href="#planos" class="nav-link">Planos</a>
         <a href="#links" class="nav-link">Links</a>
-        <a href="https://yoshikawa-bot.github.io/termos" class="nav-link">Termos</a>
+        <a href="https://yoshikawa-bot.github.io/termos" class="nav-link" rel="noopener noreferrer">Termos</a>
       </div>
       <div class="nav-right">
-        <a href="https://wa.me/554896989549" class="nav-support">
+        <a href="https://wa.me/554896989549" class="nav-support" rel="noopener noreferrer">
           <span class="nav-support-dot"></span>
           <span class="nav-support-text">Suporte</span>
         </a>
@@ -628,8 +655,8 @@
       <h1 class="hero-title">Automação completa<br>para o seu <em>grupo</em></h1>
       <p class="hero-desc">Gerencie membros, faça figurinhas, baixe músicas, jogue jogos, utilize comandos VIP e mais outras 500 funcões.</p>
       <div class="hero-actions">
-        <button class="btn-primary" onclick="window.open('https://pixgg.com/kawalyansky', '_blank')">Alugar agora</button>
-        <button class="btn-outline" onclick="document.getElementById('planos').scrollIntoView({behavior: 'smooth'})">Ver planos</button>
+        <a href="https://pixgg.com/kawalyansky" class="btn-primary" target="_blank" rel="noopener noreferrer">Alugar agora</a>
+        <a href="#planos" class="btn-outline">Ver planos</a>
       </div>
     </div>
 
@@ -642,7 +669,7 @@
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
         <div class="notice-text">
-          Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o suporte via <a href="https://wa.me/554896989549" style="color:#DB7757;text-decoration:none;font-weight:500;">WhatsApp</a>. O acesso é liberado logo após a confirmação.
+          Após realizar o pagamento no valor do serviço escolhido, envie o comprovante para o suporte via <a href="https://wa.me/554896989549" rel="noopener noreferrer">WhatsApp</a>. O acesso é liberado logo após a confirmação.
         </div>
       </div>
       <div class="plans">
@@ -683,35 +710,35 @@
     <div class="section" id="links">
       <p class="section-label">Links e contato</p>
       <div class="links-grid">
-        <a href="https://wa.me/554896989549" class="link-item">
+        <a href="https://wa.me/554896989549" class="link-item" rel="noopener noreferrer">
           <img src="https://yoshikawa-bot.github.io/cache/images/43d47ea3.png" alt="WhatsApp" class="link-icon-img">
           <div>
             <div class="link-label">Suporte</div>
             <div class="link-sub">WhatsApp</div>
           </div>
         </a>
-        <a href="https://pixgg.com/kawalyansky" class="link-item">
+        <a href="https://pixgg.com/kawalyansky" class="link-item" target="_blank" rel="noopener noreferrer">
           <img src="https://yoshikawa-bot.github.io/cache/images/e5e9381b.png" alt="PixGG" class="link-icon-img">
           <div>
             <div class="link-label">Alugar / Apoiar</div>
             <div class="link-sub">pixgg.com</div>
           </div>
         </a>
-        <a href="https://www.instagram.com/kawalyansky" class="link-item">
+        <a href="https://www.instagram.com/kawalyansky" class="link-item" target="_blank" rel="noopener noreferrer">
           <img src="https://yoshikawa-bot.github.io/cache/images/c47a87a7.png" alt="Instagram" class="link-icon-img">
           <div>
             <div class="link-label">Instagram</div>
             <div class="link-sub">@kawalyansky</div>
           </div>
         </a>
-        <a href="https://github.com/kawa-lyansky" class="link-item">
+        <a href="https://github.com/kawa-lyansky" class="link-item" target="_blank" rel="noopener noreferrer">
           <img src="https://yoshikawa-bot.github.io/cache/images/4cedbc84.png" alt="GitHub" class="link-icon-img">
           <div>
             <div class="link-label">GitHub</div>
             <div class="link-sub">kawa-lyansky</div>
           </div>
         </a>
-        <a href="https://m.youtube.com/@yoshikawa-bot" class="link-item">
+        <a href="https://m.youtube.com/@yoshikawa-bot" class="link-item" target="_blank" rel="noopener noreferrer">
           <img src="https://yoshikawa-bot.github.io/cache/images/2edc4be0.png" alt="YouTube" class="link-icon-img">
           <div>
             <div class="link-label">YouTube</div>
@@ -723,32 +750,41 @@
 
     <div class="footer">
       <p class="footer-text">
-        Yoshikawa ESM · Desenvolvida por <a href="https://github.com/kawa-lyansky"><span class="footer-credit">@kawalyansky</span></a><br>
-        <a href="https://yoshikawa-bot.github.io/termos">Termos de uso</a> · <a href="https://akyronhost.com/">Akyron Host</a> · <a href="mailto:yoshikawa_bot@proton.me">yoshikawa_bot@proton.me</a>
+        Yoshikawa ESM · Desenvolvida por <a href="https://github.com/kawa-lyansky" rel="noopener noreferrer"><span class="footer-credit">@kawalyansky</span></a><br>
+        <a href="https://yoshikawa-bot.github.io/termos" rel="noopener noreferrer">Termos de uso</a> · <a href="https://akyronhost.com/" target="_blank" rel="noopener noreferrer">Akyron Host</a> · <a href="mailto:yoshikawa_bot@proton.me">yoshikawa_bot@proton.me</a>
       </p>
     </div>
   </div>
 
   <script>
-    function toggleDrawer() {
-      document.getElementById('drawer').classList.toggle('open');
-      document.getElementById('overlay').classList.toggle('open');
-      document.getElementById('hamburger').classList.toggle('open');
-    }
-    
-    function closeDrawer() {
-      document.getElementById('drawer').classList.remove('open');
-      document.getElementById('overlay').classList.remove('open');
-      document.getElementById('hamburger').classList.remove('open');
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    const hamburger = document.getElementById('hamburger');
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      overlay.classList.add('open');
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
     }
 
-    window.addEventListener('click', function(e) {
-      const drawer = document.getElementById('drawer');
-      const hamburger = document.getElementById('hamburger');
-      if (drawer.classList.contains('open') && !drawer.contains(e.target) && !hamburger.contains(e.target)) {
-        closeDrawer();
-      }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      overlay.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleDrawer() {
+      drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+    }
+
+    hamburger.addEventListener('click', toggleDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    drawer.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', closeDrawer);
     });
   </script>
 </body>
-</html>
+        </html>
